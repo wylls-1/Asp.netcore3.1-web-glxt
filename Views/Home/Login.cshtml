@@ -1,0 +1,36 @@
+﻿@model WebHomework.Controllers.User
+@{
+    ViewData["Title"] = "Login";
+}
+
+<h1>Login</h1>
+
+
+<form method="post" class="mt-5">
+
+    <div class="form-group row">
+        <label class="col-sm-1 col-form-label"asp-for="UserName">用户名：</label>
+        <div class="col-sm-4">
+            <input class="form-control" type="text" asp-for="UserName">
+            <span class="text-danger"  asp-validation-for="UserName"></span>
+           
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-1 col-form-label" asp-for="UserPad">密&emsp;码：</label>
+        <div class="col-sm-4">
+            <input class="form-control" type="password" asp-for="UserPad">
+            <span class="text-danger"  asp-validation-for="UserPad"></span>
+        </div>
+    </div>
+    <br />
+    <div class="form-group row">
+        <div>
+            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+            <button type="submit" class="btn btn-primary">登录</button>
+            &emsp;&emsp;
+            <a asp-controller="home" asp-action="index" class="btn btn-danger">返回</a>
+        </div>
+    </div>
+
+</form>

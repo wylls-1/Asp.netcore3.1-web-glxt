@@ -1,0 +1,123 @@
+﻿@model Employee
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="tab-pane active">
+    <table class="table table-hover ">
+        <caption>个人信息</caption>
+        <thead>
+            <tr>
+                <th>工号</th>
+                <th>姓名</th>
+                <th>工作状态</th>
+                <th>入职时间</th>
+                <th>工作岗位</th>
+                <th>职务</th>
+                <th>部门编号</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@Model.EmpId</td>
+                <td>@Model.Name</td>
+                <td>@Model.State</td>
+                <td>@Model.WorkStart</td>
+                <td>@Model.Job</td>
+                <td>@Model.Position</td>
+                <td>@Model.DepId</td>
+            </tr>
+        </tbody>
+
+    </table>
+
+
+    <div class="form-group">
+        <label>申请离职理由：</label>
+        <input type="text" class="col-auto input-group" id="lz" placeholder="工资太少">
+        <button onclick="btnOn1()" class="btn btn-primary" id="btn1" disabled="disabled">申请</button>
+    </div>
+    <div class="form-group">
+        <label>申请退休理由：</label>
+        <input type="text" class="col-auto input-group" id="tx" placeholder="工资太少">
+        <button onclick="btnOn2()" class="btn btn-primary"id="btn2" disabled="disabled">申请</button>
+    </div>
+    <div class="form-group">
+        <label>申请调动部门：</label>
+        <input type="text" class="col-auto input-group" id="ddbm" placeholder="001">
+        <button onclick="btnOn3()" class="btn btn-primary"id="btn3" disabled="disabled">申请</button>
+    </div>
+</div>
+
+<script type="text/javascript">
+    window.onload = function () {
+        this.document.getElementById("loginIndex").text = "@Model.EmpId";
+        $('#btn1').attr("disabled", false);
+        $('#btn2').attr("disabled", false);
+        $('#btn3').attr("disabled", false);
+    }
+    function btnOn1() {
+          $.ajax({
+            url: "/user/departure",
+            data: { "name1":document.getElementById("lz").value,"id":"@Model.EmpId" },
+            type: "post",
+            dataType: "text",
+            success: function (res) {
+                if (res == "ok") {
+                    alert("申请成功，请等待管理员批准！");
+                    document.getElementById('btn1').disabled = "disabled";
+                }
+                else if (res == "4") {
+                    alert("你已经离职！");
+                }
+                else if (res == "6") {
+                    alert("你已经退休！");
+                }
+            }
+        });
+    }
+    function btnOn2() {
+        $.ajax({
+            url: "/user/retired",
+            data: { "name2":document.getElementById("tx").value,"id":"@Model.EmpId" },
+            type: "post",
+            dataType: "text",
+            success: function (res) {
+                if (res == "ok") {
+                    alert("申请成功，请等待管理员批准！");
+                    document.getElementById("btn2").disabled = true; 
+                }
+                else if (res == "4") {
+                    alert("你已经离职！");
+                }
+                else if (res == "6") {
+                    alert("你已经退休！");
+                }
+            }
+        });
+    }
+    function btnOn3() {
+        $.ajax({
+            url: "/user/move",
+            data: { "name3":document.getElementById("ddbm").value,"id":"@Model.EmpId" },
+            type: "post",
+            dataType: "text",
+            success: function (res) {
+                if (res == "ok") {
+                    alert("申请成功，请等待管理员批准！");
+                    document.getElementById("btn3").disabled = true; 
+                }
+                else if (res == "4") {
+                    alert("你已经离职！");
+                }
+                else if (res == "6") {
+                    alert("你已经退休！");
+                }
+                else {
+                    alert("申请失败，部门输入有误！");
+                }
+            }
+        });
+        }
+</script>
+

@@ -1,0 +1,8 @@
+1	001	4	改造提升	True	True
+2	001	6	你猜猜	True	True
+3	001	6	社会	True	False
+4	001	6	你查	True	False
+5	003	1	002	True	True
+6	001	1	002	True	True
+7	001	4		True	True
+8	001	6	ss	True	True
